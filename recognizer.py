@@ -2,10 +2,10 @@ import cv2
 import pickle
 from keras_facenet import FaceNet
 from mtcnn.mtcnn import MTCNN
-from .face_utils import find_best_match
+from face_utils import find_best_match
 
 class FaceRecognizer:
-    def __init__(self, embedding_path="data/embeddings.pkl"):
+    def __init__(self, embedding_path="data_embeddings/embeddings.pkl"):
         self.detector = MTCNN()
         self.embedder = FaceNet()
         with open(embedding_path, "rb") as f:
