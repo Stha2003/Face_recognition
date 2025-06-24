@@ -31,10 +31,15 @@ def capture_image(window):
             if name:
                 cv2.imwrite(f"data/{name}.jpg", label.current_frame)
                 print(f"Image saved as {name}.jpg")
+        label.destroy()
+        save_btn.destroy()
+        quit_btn.destroy()
 
     def on_close():
         cap.release()
-        window.destroy()
+        label.destroy()
+        save_btn.destroy()
+        quit_btn.destroy()
 
     save_btn = tk.Button(window, text="Save Image", command=save_frame)
     save_btn.pack()

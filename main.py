@@ -36,10 +36,11 @@ def take_image():
     capture_image(window)
 
 def face_recognition():
+    global window
     encode_faces()
     # Then start real-time recognition
     recognizer = FaceRecognizer()
-    recognizer.recognize_from_video()
+    recognizer.recognize_from_video(window)
 
 
 def main():
