@@ -35,12 +35,19 @@ def take_image():
     global window
     capture_image(window)
 
-def face_recognition():
+def mtcnn_recog():
     global window
     encode_faces()
     # Then start real-time recognition
     recognizer = FaceRecognizer()
-    recognizer.recognize_from_video(window)
+    recognizer.recognize_from_video(window, 1)
+
+def yolov8_recog():
+    global window
+    encode_faces()
+    # Then start real-time recognition
+    recognizer = FaceRecognizer()
+    recognizer.recognize_from_video(window, 2)
 
 
 def main():
@@ -61,16 +68,27 @@ def main():
     )
     image_button.pack()
 
-    # Detect
-    detect_button = tk.Button(
+    # detect using mtcnn
+    mtcnn_button = tk.Button(
         window, 
-        text= "Start Detection",
-        command= face_recognition,
+        text= "Start Detection (MTCNN)",
+        command= mtcnn_recog,
         background= "Green",
         pady= 10,
         padx = 10
     )
-    detect_button.pack()
+    mtcnn_button.pack()
+    
+    # detect using yolov8 model
+    mtcnn_button = tk.Button(
+        window, 
+        text= "Start Detection (Yolov8)",
+        command= yolov8_recog,
+        background= "Green",
+        pady= 10,
+        padx = 10
+    )
+    mtcnn_button.pack()
 
     # Exit button 
     exit_button = tk.Button(
