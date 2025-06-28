@@ -31,6 +31,9 @@
 #                         face_img = rgb[y:y+h, x:x+w]
 #                         try:
 #                             embedding = self.embedder.embeddings([face_img])[0]
+#                             name = find_best_match(embedding, self.known_embeddings, self.known_names)
+#                             cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+#                             cv2.putText(frame, name, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (255, 255, 255), 2)
 #                         except:
 #                             continue
 #                 case 2: 
@@ -43,11 +46,11 @@
 #                             face_img = rgb[y:y2, x:x2]
 #                             try:
 #                                 embedding = self.embedder.embeddings([face_img])[0]
+#                                 name = find_best_match(embedding, self.known_embeddings, self.known_names)
+#                                 cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+#                                 cv2.putText(frame, name, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (255, 255, 255), 2)
 #                             except:
 #                                 continue
-#             name = find_best_match(embedding, self.known_embeddings, self.known_names)
-#             cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
-#             cv2.putText(frame, name, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (255, 255, 255), 2)
 #             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 #             img = Image.fromarray(frame)
 #             imgtk = ImageTk.PhotoImage(image=img)
@@ -68,13 +71,13 @@
 #         update_frame()
 #         window.mainloop()
 
-#             # cv2.imshow("Face Recognition", frame)
-#             # if cv2.waitKey(1) & 0xFF == ord('q'):
-#             #     break
-#         # cap.release()
-#         # cv2.destroyAllWindows()
+            # cv2.imshow("Face Recognition", frame)
+            # if cv2.waitKey(1) & 0xFF == ord('q'):
+            #     break
+        # cap.release()
+        # cv2.destroyAllWindows()
 
-# recognizer.py
+    #  sumesh code: 
 import cv2
 import pickle
 import tkinter as tk
