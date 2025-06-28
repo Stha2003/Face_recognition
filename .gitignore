@@ -1,1 +1,15 @@
 custom/data/
+# Python
+venv/
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+
+# IDEs
+.idea/
+.vscode/
+
+# OS junk
+.DS_Store
+Thumbs.db

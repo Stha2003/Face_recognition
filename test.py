@@ -1,12 +1,15 @@
+# test.py
+
 import cv2
-from PIL import ImageTk, Image
+import os
+import datetime
 import tkinter as tk
-from tkinter import simpledialog  # Missing import
+from PIL import Image, ImageTk
+from tkinter import simpledialog
 
 def capture_image(window):
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
-    # checking if cap is opened
     if not cap.isOpened():
         print("Error: Could not open webcam.")
         return
@@ -20,7 +23,7 @@ def capture_image(window):
             frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             img = Image.fromarray(frame_rgb)
             imgtk = ImageTk.PhotoImage(image=img)
-            label.imgtk = imgtk  # 🔐 Prevent garbage collection
+            label.imgtk = imgtk
             label.config(image=imgtk)
             label.current_frame = frame
         label.after(10, update_frame)
@@ -29,24 +32,22 @@ def capture_image(window):
         if hasattr(label, "current_frame"):
             name = simpledialog.askstring("Save Image", "Enter image name:")
             if name:
-                cv2.imwrite(f"data/{name}.jpg", label.current_frame)
-                print(f"Image saved as {name}.jpg")
-        label.destroy()
-        save_btn.destroy()
-        quit_btn.destroy()
+                os.makedirs("data", exist_ok=True)
+                path = f"data/{name}.jpg"
+                cv2.imwrite(path, label.current_frame)
+                print(f"✅ Image saved as: {path}")
+        close_window()
 
-    def on_close():
+    def close_window():
         cap.release()
-        label.destroy()
-        save_btn.destroy()
-        quit_btn.destroy()
+        window.destroy()
 
-    save_btn = tk.Button(window, text="Save Image", command=save_frame)
-    save_btn.pack()
+    # Buttons
+    save_btn = tk.Button(window, text="💾 Save Image", command=save_frame)
+    save_btn.pack(pady=10)
 
-    quit_btn = tk.Button(window, text="Quit", command=on_close)
-    quit_btn.pack()
+    quit_btn = tk.Button(window, text="❌ Cancel", command=close_window)
+    quit_btn.pack(pady=5)
 
-    window.protocol("WM_DELETE_WINDOW", on_close)
+    window.protocol("WM_DELETE_WINDOW", close_window)
     update_frame()
-    window.mainloop()
