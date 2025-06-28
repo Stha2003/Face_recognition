@@ -1,6 +1,6 @@
 # main.py
 
-import customtkinter as ctk
+
 import os
 import tkinter as tk
 
